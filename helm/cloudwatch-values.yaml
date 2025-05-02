@@ -1,0 +1,9 @@
+cloudWatch:
+  enabled: true
+  logGroupName: "/aws/containerinsights/nodejs-eks-cluster/application"
+  logStreamPrefix: "fluentbit"
+  region: "us-east-1"
+
+serviceAccount:
+  create: true
+  name: "fluentbit-sa"

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-green
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodejs-hello
+      version: green
+  template:
+    metadata:
+      labels:
+        app: nodejs-hello
+        version: green
+    spec:
+      containers:
+      - name: nodejs-hello
+        image: IMAGE_PLACEHOLDER
+        ports:
+        - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        env:
+        - name: VERSION
+          value: "green"  
